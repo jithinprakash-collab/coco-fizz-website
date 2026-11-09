@@ -8,11 +8,31 @@
 <link rel="stylesheet" href="styles.css">
 <title>Contact | COCO FIZZ</title><meta name='description' content='Contact COCO FIZZ for product, distribution and business enquiries.'></head><body><header class="topbar"><div class="wrap nav">
 <a class="brand" href="index.html"><span class="brand-mark">C</span> COCO FIZZ</a>
-<nav class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a></nav>
-</div></header><main>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks"><span class="menu-icon" aria-hidden="true">☰</span></button>
+<nav class="navlinks" id="navLinks">
+<a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a>
+</nav></div></header><main>
 <section class="page-hero"><div class="wrap"><div class="eyebrow">Let's connect</div><h1>We'd love to hear from you.</h1><p>For product enquiries, business opportunities, distribution and more, get in touch.</p></div></section>
 <section class="page-content contact"><div class="wrap"><div class="contact-grid"><div class="contact-panel"><h3>Reach COCO FIZZ</h3><div class="contact-line"><span class="ico">☎</span><div><small>Business phone</small><span class="value" id="businessPhone">Contact details coming soon</span></div></div><div class="contact-line"><span class="ico">✉</span><div><small>Email</small><span class="value" id="businessEmail">Contact details coming soon</span></div></div><div class="contact-line"><span class="ico">⌖</span><div><small>Office address</small><span class="value" id="officeAddress">Contact details coming soon</span></div></div><div class="contact-line"><span class="ico">🏭</span><div><small>Factory address</small><span class="value" id="factoryAddress">Contact details coming soon</span></div></div><div class="socials" id="socialLinks"></div></div><div class="contact-panel"><h3>Factory &amp; product enquiries</h3><div class="contact-line"><span class="ico">☎</span><div><small>Factory phone</small><span class="value" id="factoryPhone">Contact details coming soon</span></div></div><div class="contact-line"><span class="ico">◉</span><div><small>WhatsApp</small><span class="value" id="whatsappNumber">Contact details coming soon</span></div></div><div class="contact-line"><span class="ico">↗</span><div><small>Find us</small><a id="mapsLink" href="#" target="_blank" rel="noopener">Map link will appear here</a></div></div><p style="color:#d8e7dd;margin-top:22px">For bulk orders and distribution enquiries, use WhatsApp or email.</p></div></div></div></section>
 </main><footer class="footer"><div class="wrap footer-row"><span>© <span class="year"></span> COCO FIZZ. All rights reserved.</span><a href="admin.html">Admin access</a><span>A refreshing taste of the tropics.</span></div></footer>
 <script>document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="app.js"></script>
+
+<script>
+(() => {
+  const button = document.getElementById('menuBtn');
+  const menu = document.getElementById('navLinks');
+  if (!button || !menu) return;
+  const close = () => { menu.classList.remove('open'); button.setAttribute('aria-expanded','false'); button.setAttribute('aria-label','Open navigation menu'); button.querySelector('.menu-icon').textContent='☰'; };
+  button.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    button.querySelector('.menu-icon').textContent = isOpen ? '✕' : '☰';
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+  document.addEventListener('keydown', event => { if(event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if(window.innerWidth > 760) close(); });
+})();
+</script>
 </body></html>

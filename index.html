@@ -8,15 +8,35 @@
 <link rel="stylesheet" href="styles.css">
 <title>COCO FIZZ | A refreshing taste of the tropics</title><meta name='description' content='Discover COCO FIZZ fruit juices and coconut water, born from the roots of a traditional coconut oil mill.'></head><body><header class="topbar"><div class="wrap nav">
 <a class="brand" href="index.html"><span class="brand-mark">C</span> COCO FIZZ</a>
-<nav class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a></nav>
-</div></header><main>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks"><span class="menu-icon" aria-hidden="true">☰</span></button>
+<nav class="navlinks" id="navLinks">
+<a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a>
+</nav></div></header><main>
 <section class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">A refreshing taste of the tropics</div><h1>Make room for <span>refreshment.</span></h1><p class="hero-copy">Meet COCO FIZZ — a beverage range inspired by our coconut roots and made for enjoyable flavour moments.</p><div class="hero-actions"><a class="btn" href="products.html">Explore our range</a><a class="btn btn-outline" href="our-story.html">Discover our story</a></div></div><div class="hero-art"><div class="sun"></div><div class="art-card"><div class="bottle"><div class="bottle-label">COCO FIZZ<small>A TASTE OF THE TROPICS</small></div></div></div><span class="floating-fruit fruit-one">🥭</span><span class="floating-fruit fruit-two">🥥</span></div></div></section>
-<section class="products"><div class="wrap"><div class="section-head"><div class="kicker">Discover COCO FIZZ</div><h2>Flavours to brighten your day</h2><p>Explore our current 200 ml range.</p></div><div class="product-grid">
-<article class="product-card"><div class="product-photo"><div class="product-placeholder guava">GUAVA</div></div><h3>Guava Juice</h3><p>Distinctive guava taste and fruity aroma in a refreshing drink.</p><div class="product-meta"><span>200 ml</span><a class="product-enquire" href="products.html">Explore</a></div></article>
-<article class="product-card"><div class="product-photo"><div class="product-placeholder grape">GRAPE</div></div><h3>Grape Juice</h3><p>Rich grape flavour with a delicious sweet-tangy character.</p><div class="product-meta"><span>200 ml</span><a class="product-enquire" href="products.html">Explore</a></div></article>
-<article class="product-card"><div class="product-photo"><div class="product-placeholder carrot">CARROT &amp; LEMON</div></div><h3>Carrot &amp; Lemon Juice</h3><p>A distinctive pairing of carrot flavour and citrus zing.</p><div class="product-meta"><span>200 ml</span><a class="product-enquire" href="products.html">Explore</a></div></article>
-<article class="product-card"><div class="product-photo"><div class="product-placeholder coconut">COCONUT WATER</div></div><h3>Coconut Water</h3><p>Light, delicate coconut water with a taste of the tropics.</p><div class="product-meta"><span>200 ml</span><a class="product-enquire" href="products.html">Explore</a></div></article>
-</div><p style="text-align:center;margin-top:28px"><a class="btn" href="products.html">View all products</a></p></div></section>
+
+
+<section class="home-next"><div class="wrap home-next-inner">
+<div><div class="kicker">Discover the range</div><h2>Curious about COCO FIZZ?</h2><p>Explore our beverages and find the flavour that catches your eye.</p></div>
+<a class="btn" href="products.html">Explore our range <span aria-hidden="true">→</span></a>
+</div></section>
 <section class="story"><div class="wrap story-grid"><div class="story-visual"><div class="coconut-icon">🥥</div><strong>Rooted in a coconut story</strong><span>From an oil mill to a new beverage idea</span></div><div class="story-copy"><div class="kicker">Where it began</div><h2>Our story started with a simple question.</h2><p class="lead">Before COCO FIZZ, our journey was rooted in a traditional coconut oil mill.</p><p>We made coconut oil using copra — the dried kernel of the coconut. During the process, coconut water was simply being discarded. That made us ask: could we make better use of what the coconut gives us?</p><p>That thought grew into an idea to explore beverages. It became COCO FIZZ — a new chapter alongside the roots of our coconut oil mill.</p><a class="product-enquire" href="our-story.html">Read our full story →</a></div></div></section>
 </main><footer class="footer"><div class="wrap footer-row"><span>© <span class="year"></span> COCO FIZZ. All rights reserved.</span><a href="admin.html">Admin access</a><span>A refreshing taste of the tropics.</span></div></footer>
-<script>document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());</script></body></html>
+<script>document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());</script>
+<script>
+(() => {
+  const button = document.getElementById('menuBtn');
+  const menu = document.getElementById('navLinks');
+  if (!button || !menu) return;
+  const close = () => { menu.classList.remove('open'); button.setAttribute('aria-expanded','false'); button.setAttribute('aria-label','Open navigation menu'); button.querySelector('.menu-icon').textContent='☰'; };
+  button.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    button.querySelector('.menu-icon').textContent = isOpen ? '✕' : '☰';
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+  document.addEventListener('keydown', event => { if(event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if(window.innerWidth > 760) close(); });
+})();
+</script>
+</body></html>

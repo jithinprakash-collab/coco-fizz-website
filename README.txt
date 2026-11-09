@@ -1,6 +1,10 @@
 COCO FIZZ MULTI-PAGE WEBSITE
 ============================
 
+LATEST FIXES
+- Added a real hamburger menu on mobile and tablet widths; it opens/closes accessibly and closes after a link is selected.
+- Removed the product cards/category section from the homepage. The homepage now has one clear Explore our range CTA leading to products.html.
+
 FILES
 - index.html          Home page
 - products.html       Product catalogue (loads active products from Supabase)

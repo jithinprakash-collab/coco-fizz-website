@@ -8,9 +8,29 @@
 <link rel="stylesheet" href="styles.css">
 <title>Our Story | COCO FIZZ</title><meta name='description' content='Discover the coconut oil mill beginnings behind COCO FIZZ.'></head><body><header class="topbar"><div class="wrap nav">
 <a class="brand" href="index.html"><span class="brand-mark">C</span> COCO FIZZ</a>
-<nav class="navlinks" id="navLinks"><a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a></nav>
-</div></header><main>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks"><span class="menu-icon" aria-hidden="true">☰</span></button>
+<nav class="navlinks" id="navLinks">
+<a href="index.html">Home</a><a href="products.html">Products</a><a href="our-story.html">Our Story</a><a href="manufacturing.html">Manufacturing</a><a href="contact.html">Contact</a><a class="nav-cta" href="contact.html">Enquire</a>
+</nav></div></header><main>
 <section class="page-hero"><div class="wrap"><div class="eyebrow">Where it began</div><h1>A new chapter, rooted in our beginnings.</h1><p>COCO FIZZ grew from a simple question that emerged during our traditional coconut oil mill journey.</p></div></section>
 <section class="page-content"><div class="wrap story-grid"><div class="story-visual"><div class="coconut-icon">🥥</div><strong>Rooted in a coconut story</strong><span>From copra processing to a beverage idea</span></div><div class="story-copy text-content"><h2>Our story started with a simple question.</h2><p class="lead">Before COCO FIZZ, our journey was rooted in a traditional coconut oil mill.</p><p>We made coconut oil using copra — the dried kernel of the coconut. During the process, the coconut water was simply being discarded.</p><p>That made us pause and ask a simple question: could we make better use of what the coconut gives us?</p><p>That thought grew into an idea to explore beverages. It became COCO FIZZ — a new chapter alongside the roots of our coconut oil mill, bringing together coconut water and a range of fruit flavours.</p><p>Our story is one of building on what we know while exploring a new direction in beverages.</p></div></div></section>
 </main><footer class="footer"><div class="wrap footer-row"><span>© <span class="year"></span> COCO FIZZ. All rights reserved.</span><a href="admin.html">Admin access</a><span>A refreshing taste of the tropics.</span></div></footer>
-<script>document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());</script></body></html>
+<script>document.querySelectorAll('.year').forEach(e=>e.textContent=new Date().getFullYear());</script>
+<script>
+(() => {
+  const button = document.getElementById('menuBtn');
+  const menu = document.getElementById('navLinks');
+  if (!button || !menu) return;
+  const close = () => { menu.classList.remove('open'); button.setAttribute('aria-expanded','false'); button.setAttribute('aria-label','Open navigation menu'); button.querySelector('.menu-icon').textContent='☰'; };
+  button.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    button.querySelector('.menu-icon').textContent = isOpen ? '✕' : '☰';
+  });
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+  document.addEventListener('keydown', event => { if(event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => { if(window.innerWidth > 760) close(); });
+})();
+</script>
+</body></html>
