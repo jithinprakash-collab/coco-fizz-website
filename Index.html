@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COCO FIZZ | Freshness in Every Sip</title>
+<meta name="theme-color" content="#123d2b">
+<style>
+:root{--green:#123d2b;--lime:#d6f36a;--cream:#f8f7ed;--muted:#66766b}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:var(--green)}
+header{background:var(--green);color:white;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px}
+nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{padding:75px 7%;background:var(--green);color:white;min-height:390px;display:flex;align-items:center}
+.hero h1{font-size:clamp(42px,8vw,78px);line-height:1;margin:0 0 20px}
+.hero p{font-size:18px;line-height:1.6;max-width:520px;color:#dce9df}
+.tag{display:inline-block;background:var(--lime);color:var(--green);padding:9px 15px;border-radius:30px;font-size:12px;font-weight:bold}
+section{padding:55px 7%}
+h2{font-size:34px;margin:0 0 12px}
+.sub{color:var(--muted);line-height:1.6}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;margin-top:28px}
+.product{background:white;border-radius:18px;overflow:hidden;box-shadow:0 5px 22px #123d2b12}
+.product img{width:100%;height:220px;object-fit:cover;background:#e8eddf}
+.product .info{padding:18px}
+.product h3{margin:0 0 8px}
+.product p{color:var(--muted);font-size:14px;line-height:1.5}
+.size{font-size:12px;font-weight:bold;color:#698044}
+.story{background:#e9efdf}
+.contact{background:var(--green);color:white}
+.contact p{line-height:1.8;color:#e0eadf}
+footer{padding:22px;text-align:center;background:#0b2c20;color:#cbd9ce;font-size:12px}
+button{background:var(--lime);color:var(--green);border:0;padding:12px 18px;border-radius:25px;font-weight:bold;cursor:pointer}
+.admin{max-width:650px;margin:35px auto;background:white;padding:24px;border-radius:15px}
+input,textarea,select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #ccd5ca;border-radius:8px;font:inherit}
+label{font-size:13px;font-weight:bold}
+.hidden{display:none!important}
+.adminrow{padding:12px;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.adminrow button{padding:8px 12px;margin:3px}
+.small{font-size:12px;color:var(--muted)}
+@media(max-width:600px){header{padding:16px 5%;flex-wrap:wrap;gap:12px}nav a{margin-left:10px;font-size:12px}.hero{padding:55px 6%}section{padding:42px 6%}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">COCO FIZZ</div>
+<nav>
+<a href="#home">Home</a><a href="#products">Products</a><a href="#story">Our Story</a><a href="#contact">Contact</a>
+</nav>
+</header>
+
+<main id="publicSite">
+<div class="hero" id="home">
+<div>
+<span class="tag">A FRESH WAY TO FEEL GOOD</span>
+<h1>Freshness<br>in Every Sip.</h1>
+<p>From the goodness of tender coconut to refreshing fruit flavours, discover the taste of freshness with COCO FIZZ.</p>
+<a href="#products"><button>Explore Our Products</button></a>
+</div>
+</div>
+
+<section id="products">
+<h2>Our Products</h2>
+<p class="sub">Discover our refreshing range of drinks.</p>
+<div class="products" id="productList"><p>Loading products...</p></div>
+</section>
+
+<section class="story" id="story">
+<h2>Our Story</h2>
+<p class="sub">COCO FIZZ began with a simple idea: bringing refreshing goodness to everyday life. Starting with tender coconut water, our journey has grown into a range of delicious juice flavours. We believe every sip should bring a little freshness to your day.</p>
+</section>
+
+<section class="contact" id="contact">
+<h2>Let's Connect</h2>
+<p id="contactDetails">For product enquiries and business enquiries, get in touch with us.</p>
+</section>
+</main>
+
+<div id="adminPanel" class="admin hidden">
+<h2>COCO FIZZ Admin</h2>
+<p class="small">Manage products and business contact details.</p>
+<div id="loginArea">
+<label>Email</label><input id="email" type="email" placeholder="Admin email">
+<label>Password</label><input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p id="loginMessage"></p>
+</div>
+<div id="dashboard" class="hidden">
+<button onclick="logout()">Logout</button>
+<h3>Products</h3>
+<div id="adminProducts"></div>
+<h3 id="formTitle">Add a Product</h3>
+<input id="productId" type="hidden">
+<label>Product name</label><input id="productName" placeholder="Product name">
+<label>Description</label><textarea id="productDescription" placeholder="Product description"></textarea>
+<label>Size</label><input id="productSize" value="200 ml">
+<label>Product image</label><input id="productImage" type="file" accept="image/*">
+<label>Display order</label><input id="productOrder" type="number" value="1">
+<button onclick="saveProduct()">Save Product</button>
+<button onclick="clearForm()">Clear</button>
+<p id="productMessage"></p>
+<hr>
+<h3>Business Contact Details</h3>
+<label>Factory phone</label><input id="factoryPhone">
+<label>WhatsApp number</label><input id="whatsapp">
+<label>Business phone</label><input id="businessPhone">
+<label>Factory address</label><textarea id="factoryAddress"></textarea>
+<label>Office address</label><textarea id="officeAddress"></textarea>
+<label>Business email</label><input id="businessEmail">
+<label>Google Maps URL</label><input id="mapsUrl">
+<label>Instagram URL</label><input id="instagramUrl">
+<label>Facebook URL</label><input id="facebookUrl">
+<button onclick="saveSettings()">Save Contact Details</button>
+<p id="settingsMessage"></p>
+</div>
+</div>
+
+<footer>© <span id="year"></span> COCO FIZZ. All rights reserved.</footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://vfypmgioczkmmhmcsntn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_YffaAX_E77Sw7AoOxlwpMw_Up2289Vo';
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+$('year').textContent = new Date().getFullYear();
+
+function showMessage(id,msg){$(id).textContent=msg}
+function escapeHTML(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+async function loadProducts(){
+ const {data,error}=await db.from('products').select('*').eq('is_active',true).order('display_order');
+ if(error){$('productList').innerHTML='<p>Products are temporarily unavailable.</p>';return}
+ $('productList').innerHTML=data.length?data.map(p=>`
+ <article class="product">
+ ${p.image_url?`<img src="${escapeHTML(p.image_url)}" alt="${escapeHTML(p.name)}">`:`<div style="height:220px;display:grid;place-items:center;background:#e8eddf;font-size:50px">🥤</div>`}
+ <div class="info"><h3>${escapeHTML(p.name)}</h3><p>${escapeHTML(p.description||'Refreshing goodness in every sip.')}</p><span class="size">${escapeHTML(p.size||'200 ml')}</span></div>
+ </article>`).join(''):'<p>Our products will be available here soon.</p>';
+}
+
+async function loadSettings(){
+ const {data}=await db.from('business_settings').select('*').eq('id',1).maybeSingle();
+ if(!data)return;
+ const items=[];
+ if(data.factory_phone)items.push('Factory: '+data.factory_phone);
+ if(data.business_phone)items.push('Phone: '+data.business_phone);
+ if(data.whatsapp_number)items.push('WhatsApp: '+data.whatsapp_number);
+ if(data.business_email)items.push('Email: '+data.business_email);
+ if(data.factory_address)items.push('Factory address: '+data.factory_address);
+ if(data.office_address)items.push('Office: '+data.office_address);
+ if(data.instagram_url)items.push('<a style="color:#d6f36a" href="'+escapeHTML(data.instagram_url)+'" target="_blank">Instagram</a>');
+ if(data.facebook_url)items.push('<a style="color:#d6f36a" href="'+escapeHTML(data.facebook_url)+'" target="_blank">Facebook</a>');
+ if(data.google_maps_url)items.push('<a style="color:#d6f36a" href="'+escapeHTML(data.google_maps_url)+'" target="_blank">Find us on Maps</a>');
+ if(items.length)$('contactDetails').innerHTML=items.map(x=>'<div>'+x+'</div>').join('');
+}
+
+async function login(){
+ showMessage('loginMessage','Signing in...');
+ const {error}=await db.auth.signInWithPassword({email:$('email').value,password:$('password').value});
+ if(error){showMessage('loginMessage',error.message);return}
+ await checkSession();
+}
+window.login=login;
+
+async function logout(){await db.auth.signOut();location.hash='';location.reload()}
+window.logout=logout;
+
+async function checkSession(){
+ const {data:{user}}=await db.auth.getUser();
+ const {data:admin}=user?await db.from('admin_users').select('user_id').eq('user_id',user.id).maybeSingle():{data:null};
+ if(user&&admin){
+ $('loginArea').classList.add('hidden');$('dashboard').classList.remove('hidden');
+ await loadAdminProducts();await loadAdminSettings();
+ }else{
+ $('loginArea').classList.remove('hidden');$('dashboard').classList.add('hidden');
+ if(user)showMessage('loginMessage','This account is not authorised as an admin.');
+ }
+}
+async function loadAdminProducts(){
+ const {data,error}=await db.from('products').select('*').order('display_order');
+ if(error){$('adminProducts').textContent=error.message;return}
+ $('adminProducts').innerHTML=data.map(p=>`
+ <div class="adminrow"><div><b>${escapeHTML(p.name)}</b><div class="small">${p.is_active?'Active':'Discontinued'}</div></div>
+ <div><button onclick="editProduct('${p.id}')">Edit</button><button onclick="toggleProduct('${p.id}',${!p.is_active})">${p.is_active?'Discontinue':'Reactivate'}</button></div></div>`).join('');
+ window.productRecords=data;
+}
+window.editProduct=id=>{
+ const p=window.productRecords.find(x=>x.id===id);if(!p)return;
+ $('productId').value=p.id;$('productName').value=p.name;$('productDescription').value=p.description||'';
+ $('productSize').value=p.size||'200 ml';$('productOrder').value=p.display_order||1;$('formTitle').textContent='Edit Product';
+};
+window.toggleProduct=async(id,active)=>{
+ const {error}=await db.from('products').update({is_active:active}).eq('id',id);
+ if(error)alert(error.message);else{await loadAdminProducts();await loadProducts()}
+};
+window.clearForm=()=>{
+ ['productId','productName','productDescription'].forEach(id=>$(id).value='');
+ $('productSize').value='200 ml';$('productOrder').value='1';$('productImage').value='';$('formTitle').textContent='Add a Product';
+};
+window.saveProduct=async()=>{
+ const id=$('productId').value;
+ const name=$('productName').value.trim();
+ if(!name){showMessage('productMessage','Enter a product name.');return}
+ let imageUrl=null;
+ const file=$('productImage').files[0];
+ if(file){
+ const safeName=Date.now()+'-'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+ const {error}=await db.storage.from('product-images').upload(safeName,file);
+ if(error){showMessage('productMessage','Image upload failed: '+error.message);return}
+ imageUrl=db.storage.from('product-images').getPublicUrl(safeName).data.publicUrl;
+ }
+ const record={name,description:$('productDescription').value,size:$('productSize').value||'200 ml',display_order:Number($('productOrder').value)||1};
+ if(imageUrl)record.image_url=imageUrl;
+ const result=id?await db.from('products').update(record).eq('id',id):await db.from('products').insert(record);
+ if(result.error){showMessage('productMessage',result.error.message);return}
+ showMessage('productMessage','Product saved successfully.');
+ clearForm();await loadAdminProducts();await loadProducts();
+};
+window.saveProduct=window.saveProduct;
+
+async function loadAdminSettings(){
+ const {data}=await db.from('business_settings').select('*').eq('id',1).maybeSingle();
+ if(!data)return;
+ const fields={factoryPhone:'factory_phone',whatsapp:'whatsapp_number',businessPhone:'business_phone',factoryAddress:'factory_address',officeAddress:'office_address',businessEmail:'business_email',mapsUrl:'google_maps_url',instagramUrl:'instagram_url',facebookUrl:'facebook_url'};
+ for(const [id,key] of Object.entries(fields))$(id).value=data[key]||'';
+}
+window.saveSettings=async()=>{
+ const record={factory_phone:$('factoryPhone').value,whatsapp_number:$('whatsapp').value,business_phone:$('businessPhone').value,factory_address:$('factoryAddress').value,office_address:$('officeAddress').value,business_email:$('businessEmail').value,google_maps_url:$('mapsUrl').value,instagram_url:$('instagramUrl').value,facebook_url:$('facebookUrl').value};
+ const {error}=await db.from('business_settings').update(record).eq('id',1);
+ showMessage('settingsMessage',error?error.message:'Contact details updated.');
+ if(!error)await loadSettings();
+};
+
+async function init(){
+ await loadProducts();await loadSettings();
+ if(location.hash==='#admin'){$('publicSite').classList.add('hidden');$('adminPanel').classList.remove('hidden');await checkSession()}
+}
+window.addEventListener('hashchange',()=>location.reload());
+init();
+</script>
+</body>
+</html>
